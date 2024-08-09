@@ -2,10 +2,11 @@ import { calculateMortgage } from '@banking-web-apps/mortgage-lib';
 import { NextRequest, NextResponse } from 'next/server';
 
 export default function handler(req: NextRequest, res: NextResponse) {
-  const { homePrice, downPayment, interestRate, loanTerm, currency } =
-    req.query;
+  // @ts-ignore
+  const { homePrice, downPayment, interestRate, loanTerm, currency } = req.query;
 
   if (!homePrice || !downPayment || !interestRate || !loanTerm || !currency) {
+    // @ts-ignore
     return res.json({ error: 'Missing parameters' }, { status: 400 });
   }
 
@@ -16,6 +17,7 @@ export default function handler(req: NextRequest, res: NextResponse) {
     loanTerm: +loanTerm,
     currency,
   });
-
+  
+  // @ts-ignore
   res.status(200).json({ payment });
 }
